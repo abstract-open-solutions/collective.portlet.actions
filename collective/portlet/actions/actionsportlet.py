@@ -5,7 +5,12 @@
 from Acquisition import aq_inner
 from zope.interface import implements
 from zope import schema
-from zope.formlib import form
+
+PLONE4 = getFSVersionTuple()[0] <= 4
+
+if not PLONE4:
+    from zope.formlib import form
+
 #from zope.app.schema.vocabulary import IVocabularyFactory
 from zope.schema.interfaces import IVocabularyFactory
 
@@ -186,7 +191,7 @@ class Renderer(base.Renderer):
                         and action['url']):
                     continue
                 link = {
-                    'id':action['id'],                  
+                    'id':action['id'],
                     'url': action['url'],
                     'title': action['title'],
                     'icon': render_icon(
@@ -204,7 +209,10 @@ class AddForm(base.AddForm):
     zope.formlib which fields to display. The create() method actually
     constructs the assignment that is being added.
     """
-    form_fields = form.Fields(IActionsPortlet)
+    if PLONE4:
+        form_fields = form.Fields(IActionsPortlet)
+    else:
+        schema = IActionsPortlet
     label = _(u'heading_add_actions_portlet',
               default=u'Add actions portlet')
     description= _(u'help_add_actions_portlet',
@@ -220,7 +228,10 @@ class EditForm(base.EditForm):
     This is registered with configure.zcml. The form_fields variable tells
     zope.formlib which fields to display.
     """
-    form_fields = form.Fields(IActionsPortlet)
+    if PLONE4:
+        form_fields = form.Fields(IActionsPortlet)
+    else:
+        schema = IActionsPortlet
 
 
 class ActionCategoriesVocabulary(object):

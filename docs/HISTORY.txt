@@ -5,7 +5,8 @@ Changelog
 1.2.4 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Fix compatibility with Plone5
+  [ekulos]
 
 
 1.2.3.post1 (2016-06-10)
