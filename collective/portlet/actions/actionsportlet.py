@@ -5,6 +5,7 @@
 from Acquisition import aq_inner
 from zope.interface import implements
 from zope import schema
+from Products.CMFPlone.utils import getFSVersionTuple
 
 PLONE4 = getFSVersionTuple()[0] <= 4
 
