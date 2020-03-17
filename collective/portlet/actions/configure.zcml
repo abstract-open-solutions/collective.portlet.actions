@@ -25,12 +25,17 @@
            xmlns:zcml="http://namespaces.zope.org/zcml"
            zcml:condition="have plone-41" />
 
+  <permission
+    id="collective.portlet.actions.AddActionsPortlet"
+    title="collective.portlet.actions: Add actions portlet"
+    />
+    
   <plone:portlet
      name="collective.portlet.actions.ActionsPortlet"
      interface=".actionsportlet.IActionsPortlet"
      assignment=".actionsportlet.Assignment"
      view_permission="zope2.View"
-     edit_permission="cmf.ManagePortal"
+     edit_permission="collective.portlet.actions.AddActionsPortlet"
      renderer=".actionsportlet.Renderer"
      addview=".actionsportlet.AddForm"
      editview=".actionsportlet.EditForm"
